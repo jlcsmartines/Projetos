@@ -1,0 +1,1 @@
+{"Nome": ["Joao Lucas Martines", "Ana Breatriz De Oliveira Calisto"], "Idade": [23, 23], "Nota": [7.8, 10.0]}

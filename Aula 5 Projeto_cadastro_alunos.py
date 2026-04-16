@@ -1,9 +1,15 @@
 #Programa de Cadastro de alunos básico
 
-Alunos = {
-    'Nome': [],
-    'Idade': [],
-    'Nota': []}
+import json #para poder salvar em um arquivo txt as informações dos alunos
+
+try: # irá carregar todos os alunos pelo arquivo .txt 
+    with open("Cadastros.txt", "r") as f:
+        Alunos = json.load(f)
+except:
+    Alunos = {
+        'Nome': [],
+        'Idade': [],
+        'Nota': []}
 
 def menu():
     print("\n1. Adicionar aluno") 
@@ -12,6 +18,10 @@ def menu():
     print("4. Remover aluno")
     print("5. Mostrar média geral das notas")
     print("6. Sair\n")
+
+def salvar_dados():
+    with open("Cadastros.txt", "w") as f:
+        json.dump(Alunos, f)    
 
 def adicionar_aluno(nome, idade, nota):
     Alunos['Nome'].append(nome)
@@ -71,7 +81,7 @@ while opcao != 6:
                 print("\n")
                 for i in range(len(Alunos['Nome'])):
                     print(f"Nome: {Alunos['Nome'][i]} | Idade: {Alunos['Idade'][i]} | Nota: {Alunos['Nota'][i]}")
-                    print("____________________________________________\n")
+                    print("________________________________________________________________________________________\n")
                         
         case 3: #Buscar aluno pelo nome
             print(f"Digite o nome do aluno: ")
@@ -84,9 +94,10 @@ while opcao != 6:
             remover_aluno(remover)
            
         case 5: #Mostrar média geral das notas
-            print(f'Média dos alunos: {media_aluno().2f}')
+            print(f'Média dos alunos: {media_aluno():.2f}')
 
         case 6:
+            salvar_dados()
             print(f"Encerrando o programa...\n")
 
         case _:
