@@ -46,14 +46,20 @@ while opcao != 6:
             print("Para adicioanr um aluno, digite: 'Nome' 'Idade' 'Nota'")
             nome = str(input())
             idade = int(input())
-            nota = float(input())
+            while True:
+                nota = float(input())
+                if nota >0 and nota <= 10:
+                    break
+                else:
+                    print("\nDigite uma nota que seja de 0 a 10\n")
             adicionar_aluno(nome, idade, nota)         
 
         case 2: #Listar todos os alunos
             if Alunos["Nome"] == []:
                 print("\nNão existe nenhum aluno cadastrado.\n")
             else:
-                print(f"\n{Alunos}")
+                for i in range(len(Alunos['Nome'])):
+                    print(f"Nome: {Alunos['Nome'][i]} | Idade: {Alunos['Idade'][i]} | Nota: {Alunos['Nota'][i]}")
                         
         case 3: #Buscar aluno pelo nome
             print(f"Digite o nome do aluno: ")
