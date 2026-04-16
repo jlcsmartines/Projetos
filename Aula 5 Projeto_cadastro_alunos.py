@@ -6,11 +6,11 @@ Alunos = {
     'Nota': []}
 
 def menu():
-    print("1. Adicionar aluno\n")
-    print("2. Listar todos os alunos\n")
-    print("3. Buscar aluno pelo nome\n")
-    print("4. Remover aluno\n")
-    print("5. Mostrar média geral das notas\n")
+    print("\n1. Adicionar aluno") 
+    print("2. Listar todos os alunos")
+    print("3. Buscar aluno pelo nome")
+    print("4. Remover aluno")
+    print("5. Mostrar média geral das notas")
     print("6. Sair\n")
 
 def adicionar_aluno(nome, idade, nota):
@@ -19,22 +19,29 @@ def adicionar_aluno(nome, idade, nota):
     Alunos['Nota'].append(nota)
 
 def pesquisar_aluno(nome):
-    index = int(Alunos['Nome'].index(nome))
-    print (f"\n{Alunos['Nome'][index]} | {Alunos['Idade'][index]} | {Alunos['Nota'][index]}\n")
-
+    if nome in Alunos['Nome']:
+        index = int(Alunos['Nome'].index(nome))
+        print (f"\n{Alunos['Nome'][index]} | {Alunos['Idade'][index]} | {Alunos['Nota'][index]}\n")
+    else:
+        print("Aluno não encontrado")    
+    
 def remover_aluno(nome):
-    index = int(Alunos['Nome'].index(nome))
-    Alunos['Nome'].pop(index)
-    Alunos['Idade'].pop(index)
-    Alunos['Nota'].pop(index)
+    if nome in Alunos['Nome']:
+        index = int(Alunos['Nome'].index(nome))
+        print(f"Removendo aluno(a): '{Alunos['Nome'][index]}'")
+        Alunos['Nome'].pop(index)
+        Alunos['Idade'].pop(index)
+        Alunos['Nota'].pop(index)
+    else:
+        print("\nAluno não encontrado")
 
 def media_aluno():
     media = 0
-    for nota in Alunos['Nota']:
-        media += nota
-    media = media / len(Alunos['Nota'])
-    return media
-    
+    if len(Alunos['Nota']) != 0:
+        return sum(Alunos['Nota']) / len(Alunos['Nota'])
+    else:
+        return "Não existem alunos cadastrados no momento\n"
+
 opcao = 0
 while opcao != 6:
     menu()
@@ -43,12 +50,15 @@ while opcao != 6:
     match opcao:
 
         case 1: #Adicionar aluno
-            print("Para adicioanr um aluno, digite: 'Nome' 'Idade' 'Nota'")
+            print("Para adicioanr um aluno, digite: \n")
+            print("Digite o Nome do Aluno: ")
             nome = str(input())
+            print("Digite a Idade do Aluno: ")
             idade = int(input())
+            print("Digite a Nota do Aluno: ")
             while True:
                 nota = float(input())
-                if nota >0 and nota <= 10:
+                if nota >= 0 and nota <= 10:
                     break
                 else:
                     print("\nDigite uma nota que seja de 0 a 10\n")
@@ -58,8 +68,10 @@ while opcao != 6:
             if Alunos["Nome"] == []:
                 print("\nNão existe nenhum aluno cadastrado.\n")
             else:
+                print("\n")
                 for i in range(len(Alunos['Nome'])):
                     print(f"Nome: {Alunos['Nome'][i]} | Idade: {Alunos['Idade'][i]} | Nota: {Alunos['Nota'][i]}")
+                    print("____________________________________________\n")
                         
         case 3: #Buscar aluno pelo nome
             print(f"Digite o nome do aluno: ")
@@ -72,7 +84,7 @@ while opcao != 6:
             remover_aluno(remover)
            
         case 5: #Mostrar média geral das notas
-            print(media_aluno())
+            print(f'Média dos alunos: {media_aluno().2f}')
 
         case 6:
             print(f"Encerrando o programa...\n")
