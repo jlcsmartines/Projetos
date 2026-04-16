@@ -2,7 +2,7 @@
 
 import json #para poder salvar em um arquivo txt as informações dos alunos
 
-try: # irá carregar todos os alunos pelo arquivo .txt 
+try: # irá carregar todos os alunos pelo arquivo .txt ou caso nn exista o arquivo, irá abrir uma nova lista para adicionar alunos
     with open("Cadastros.txt", "r") as f:
         Alunos = json.load(f)
 except:
@@ -11,7 +11,7 @@ except:
         'Idade': [],
         'Nota': []}
 
-def menu():
+def menu():  #mostra o menu
     print("\n1. Adicionar aluno") 
     print("2. Listar todos os alunos")
     print("3. Buscar aluno pelo nome")
@@ -19,23 +19,23 @@ def menu():
     print("5. Mostrar média geral das notas")
     print("6. Sair\n")
 
-def salvar_dados():
+def salvar_dados(): #irá salvar os dados dos alunos no arquivo txt
     with open("Cadastros.txt", "w") as f:
         json.dump(Alunos, f)    
 
-def adicionar_aluno(nome, idade, nota):
+def adicionar_aluno(nome, idade, nota): #irá adicionar um novo aluno ao sistema
     Alunos['Nome'].append(nome)
     Alunos['Idade'].append(idade)
     Alunos['Nota'].append(nota)
 
-def pesquisar_aluno(nome):
+def pesquisar_aluno(nome): #irá pesquisar um aluno pelo seu nome e trazer informações
     if nome in Alunos['Nome']:
         index = int(Alunos['Nome'].index(nome))
         print (f"\n{Alunos['Nome'][index]} | {Alunos['Idade'][index]} | {Alunos['Nota'][index]}\n")
     else:
         print("Aluno não encontrado")    
     
-def remover_aluno(nome):
+def remover_aluno(nome): #irá remover o aluno do sistema
     if nome in Alunos['Nome']:
         index = int(Alunos['Nome'].index(nome))
         print(f"Removendo aluno(a): '{Alunos['Nome'][index]}'")
@@ -45,7 +45,7 @@ def remover_aluno(nome):
     else:
         print("\nAluno não encontrado")
 
-def media_aluno():
+def media_aluno(): #mostra a média geral da escola
     media = 0
     if len(Alunos['Nota']) != 0:
         return sum(Alunos['Nota']) / len(Alunos['Nota'])
@@ -53,7 +53,7 @@ def media_aluno():
         return "Não existem alunos cadastrados no momento\n"
 
 opcao = 0
-while opcao != 6:
+while opcao != 6: #while onde funciona o sistema :p
     menu()
     print("Digite a opção que deseja acessar: ")
     opcao = int(input())
@@ -96,7 +96,7 @@ while opcao != 6:
         case 5: #Mostrar média geral das notas
             print(f'Média dos alunos: {media_aluno():.2f}')
 
-        case 6:
+        case 6: #encerrar programa e salvar as informaões dos alunos no arquivos .txt
             salvar_dados()
             print(f"Encerrando o programa...\n")
 
