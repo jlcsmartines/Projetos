@@ -1,16 +1,9 @@
-# opc do menu:
-# 1. Adicionar aluno
-# 2. Listar todos os alunos
-# 3. Buscar aluno pelo nome
-# 4. Remover aluno
-# 5. Mostrar média geral das notas
-# 6. Sair
+#Programa de Cadastro de alunos básico
 
 Alunos = {
     'Nome': [],
     'Idade': [],
-    'Nota': [],
-}
+    'Nota': []}
 
 def menu():
     print("1. Adicionar aluno\n")
@@ -21,24 +14,40 @@ def menu():
     print("6. Sair\n")
 
 def adicionar_aluno(nome, idade, nota):
-
     Alunos['Nome'].append(nome)
     Alunos['Idade'].append(idade)
     Alunos['Nota'].append(nota)
 
+def pesquisar_aluno(nome):
+    index = int(Alunos['Nome'].index(nome))
+    print (f"\n{Alunos['Nome'][index]} | {Alunos['Idade'][index]} | {Alunos['Nota'][index]}\n")
+
+def remover_aluno(nome):
+    index = int(Alunos['Nome'].index(nome))
+    Alunos['Nome'].pop(index)
+    Alunos['Idade'].pop(index)
+    Alunos['Nota'].pop(index)
+
+def media_aluno():
+    media = 0
+    for nota in Alunos['Nota']:
+        media += nota
+    media = media / len(Alunos['Nota'])
+    return media
+    
 opcao = 0
 while opcao != 6:
     menu()
     print("Digite a opção que deseja acessar: ")
     opcao = int(input())
     match opcao:
+
         case 1: #Adicionar aluno
             print("Para adicioanr um aluno, digite: 'Nome' 'Idade' 'Nota'")
             nome = str(input())
             idade = int(input())
             nota = float(input())
-            adicionar_aluno(nome, idade, nota)
-            
+            adicionar_aluno(nome, idade, nota)         
 
         case 2: #Listar todos os alunos
             if Alunos["Nome"] == []:
@@ -48,15 +57,17 @@ while opcao != 6:
                         
         case 3: #Buscar aluno pelo nome
             print(f"Digite o nome do aluno: ")
+            nome_pesquisa = str(input())
+            pesquisar_aluno(nome_pesquisa)
             
         case 4: #Remover aluno
-            print(f"{Alunos}")
-
-            
+            print(f"Digite o nome do aluno que deseja Remover: ")
+            remover = input()
+            remover_aluno(remover)
+           
         case 5: #Mostrar média geral das notas
-            print(f"{Alunos}")
+            print(media_aluno())
 
-                        
         case 6:
             print(f"Encerrando o programa...\n")
 
