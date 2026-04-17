@@ -2,22 +2,23 @@
 
 import json #para poder salvar em um arquivo txt as informações dos alunos
 
-try: # irá carregar todos os alunos pelo arquivo .txt ou caso nn exista o arquivo, irá abrir uma nova lista para adicionar alunos
+try: # irá tentar carregar todos os alunos pelo arquivo .txt
     with open("Cadastros.txt", "r") as f:
         Alunos = json.load(f)
-except:
+except: # caso nn exista o arquivo, irá abrir uma nova lista para adicionar alunos
     Alunos = {
         'Nome': [],
         'Idade': [],
         'Nota': []}
 
 def menu():  #mostra o menu
-    print("\n1. Adicionar aluno") 
+    print("\n0. Salvar dados")
+    print("1. Adicionar aluno") 
     print("2. Listar todos os alunos")
     print("3. Buscar aluno pelo nome")
     print("4. Remover aluno")
     print("5. Mostrar média geral das notas")
-    print("6. Sair\n")
+    print("6. Sair (Salvará automaticamente os dados)\n")
 
 def salvar_dados(): #irá salvar os dados dos alunos no arquivo txt
     with open("Cadastros.txt", "w") as f:
@@ -54,10 +55,20 @@ def media_aluno(): #mostra a média geral da escola
 
 opcao = 0
 while opcao != 6: #while onde funciona o sistema :p
+
     menu()
     print("Digite a opção que deseja acessar: ")
-    opcao = int(input())
+    try:
+        opcao = int(input())
+    except: #Caso a opção digitada seja alguma string 'blablabla' para não dar erro
+        print("")
+
+    
     match opcao:
+
+        case 0:
+            salvar_dados()
+            print(f"Salvando dados dos alunos...\n")
 
         case 1: #Adicionar aluno
             print("Para adicioanr um aluno, digite: \n")
@@ -101,4 +112,4 @@ while opcao != 6: #while onde funciona o sistema :p
             print(f"Encerrando o programa...\n")
 
         case _:
-            print(f"Opção inválida\n")
+            print(f"Opção inválida, tente novamente\n")
