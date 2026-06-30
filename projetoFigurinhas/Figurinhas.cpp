@@ -16,7 +16,7 @@ Tema do sistema: Controle de figurinhas da copa do mundo
 
 /* Programa não estava aceitando using namespace std */
 using std::cin;
-using std::cout;
+using std::cout; 
 using std::endl;
 using std::getline;
 using std::string;
@@ -56,6 +56,7 @@ int main()
 
     /* Figurinhas Pré Carregadas para apresentação */
     Album = {
+        /*Cod | Nome  |  ativo| quant | valor*/
         {5519, "Endrick", false, 1, 20.70},
         {5507, "Vinícios Jr.", true, 2, 50.30},
         {5509, "Matheus Cunha", true, 3, 30.50},
@@ -819,8 +820,7 @@ int main()
                         totalGeral = totalGeral + subtotal;
                     }
 
-                    cout << "\nTOTAL DA COMPRA: R$ "
-                         << totalGeral << endl;
+                    cout << "\nTOTAL DA COMPRA: R$ " << totalGeral << endl;
 
                     cout << "===================================" << endl;
 
