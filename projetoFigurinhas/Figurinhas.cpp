@@ -1,3 +1,13 @@
+/*
+
+STICKER MARKET FIFA® WORLD CUP 2026 | V1
+
+Projeto de um sistema
+Tema do sistema: Controle de figurinhas da copa do mundo
+©Made by:   João Lucas Martines
+
+*/
+
 #include <iostream>
 #include <locale>
 #include <vector>
